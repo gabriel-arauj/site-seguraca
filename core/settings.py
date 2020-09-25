@@ -123,6 +123,12 @@ USE_TZ = True
 
 STATIC_URL = 'frontend/static/'
 
+STATIC_ROOT = 'staticfiles/'
+
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'frontend/static/'),
 ]
+
+
+import django_heroku
+django_heroku.settings(locals())

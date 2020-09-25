@@ -81,6 +81,10 @@
             ><i class="material-icons">&#xE5C4;</i></a
           >
           <h2>Site inseguro</h2>
+          <div class="popup" onclick="myFunction()">
+            <i class="material-icons" >help</i>
+            <span class="popuptext" id="myPopup">Não precisa. kakaka 😎</span>
+          </div>
           <form action="{% url 'login-inseguro' %}" method="post">
             {% csrf_token %}
             <input

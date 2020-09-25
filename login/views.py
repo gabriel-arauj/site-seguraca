@@ -32,7 +32,7 @@ def login_site_inseguro(request):
     if request.method == 'POST':
         user = request.POST.get('user','')
         password = request.POST.get('password','')
-        query = UserInseguro.objects.raw(f"SELECT * FROM login_userinseguro WHERE user='{user}' AND password='{password}'")
+        query = UserInseguro.objects.raw(f"SELECT * FROM login_userinseguro WHERE login_userinseguro.user='{user}' AND login_userinseguro.password='{password}'")
         if query:
             user = query[0]
             messages.add_message(request, messages.INFO, user)

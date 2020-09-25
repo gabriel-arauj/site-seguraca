@@ -1,0 +1,130 @@
+{% extends 'base.html' %} {% load static %} {% block title %}
+<title>Site | Escolha uma opção</title>
+{% endblock %} {% block css %}
+<link
+  rel="stylesheet"
+  href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+  crossorigin="anonymous"
+/>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital@1&family=Ubuntu:wght@400;700&display=swap" rel="stylesheet">
+
+<link href="{% static 'css/comments.css' %}" rel="stylesheet" />
+{% endblock %} {% block content %}
+<div class="cotn_principal">
+<div class="container">
+  <div class="row bootstrap snippets bootdeys">
+    <div class="col-md-8 col-sm-12">
+      <div class="comment-wrapper">
+        <a href="#" class="pull-left avatar">
+          <img
+            src="https://bootdey.com/img/Content/user_{{img}}.jpg"
+            alt=""
+            class="img-circle"
+          />
+        </a>
+        <div class="media-body">
+          <span class="text-muted pull-right"> </span>
+          <strong class="text-user">@{{user}}</strong>
+          <p>
+            Bem vindo @{{user}}, {{message}}<br />
+            {% if site_seguro %}<a href="#">#esse_site_é_seguro </a>.{% else %}<a href="#">#esse_site_é_inseguro </a>.{% endif %}
+            
+          </p>
+        </div>
+        <div class="panel panel-info">
+          <div class="panel-heading">Comment panel</div>
+          <div class="panel-body">
+            <form action="{% if site_seguro %} {% url 'site-seguro' %} {% else %} {% url 'site-inseguro' %} {% endif %}" method="post">
+              {% csrf_token %}
+              <textarea
+                class="form-control"
+                placeholder="write a comment..."
+                name="comment"
+                rows="3"
+              ></textarea>
+              <br />
+              <button class="btn btn-info pull-right" onclick="">Post</button>
+            </form>
+            <div class="clearfix"></div>
+            <hr />
+            <ul class="media-list">
+              {% for comment in comments %}
+              <li class="media">
+                <a href="#" class="pull-left">
+                  <img
+                    src="https://bootdey.com/img/Content/user_{{img}}.jpg"
+                    alt=""
+                    class="img-circle"
+                  />
+                </a>
+                <div class="media-body">
+                  <span class="text-muted pull-right">
+                    <small class="text-muted">1 min ago</small>
+                  </span>
+                  <strong class="text-user">{{comment.user}}</strong>
+                  {% if site_seguro %}
+                    {{comment.comment}}
+                  {% else %}
+                    {% autoescape off %}
+                    {{comment.comment}}
+                    {% endautoescape %}
+                  {% endif %}
+                </div>
+              </li>
+              {% endfor %}
+              <li class="media">
+                <a href="#" class="pull-left">
+                  <img
+                    src="https://bootdey.com/img/Content/user_2.jpg"
+                    alt=""
+                    class="img-circle"
+                  />
+                </a>
+                <div class="media-body">
+                  <span class="text-muted pull-right">
+                    <small class="text-muted">30 min ago</small>
+                  </span>
+                  <strong class="text-user">@LaurenceCorreil</strong>
+                  <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Lorem ipsum dolor <a href="#">#ipsumdolor </a>adipiscing
+                    elit.
+                  </p>
+                </div>
+              </li>
+              <li class="media">
+                <a href="#" class="pull-left">
+                  <img
+                    src="https://bootdey.com/img/Content/user_3.jpg"
+                    alt=""
+                    class="img-circle"
+                  />
+                </a>
+                <div class="media-body">
+                  <span class="text-muted pull-right">
+                    <small class="text-muted">30 min ago</small>
+                  </span>
+                  <strong class="text-user">@JohnNida</strong>
+                  <p>
+                    Lorem ipsum dolor <a href="#">#sitamet</a> sit amet,
+                    consectetur adipiscing elit.
+                  </p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+{% endblock %} {% block script %}
+<script
+  src="https://code.jquery.com/jquery-3.5.1.js"
+  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+  crossorigin="anonymous"
+></script>
+<script src="{% static '\js\login.js' %}"></script>
+{% endblock %}

@@ -63,7 +63,7 @@ def comentarios_site_seguro(request):
         comment = request.POST.get('comment', None)
         if comment:
             comment = Comment(user=user, comment=comment)
-            comment.save()
+            #comment.save()
             return redirect(reverse('site-seguro'))
 
     all_comments = Comment.objects.all()[::-1]
